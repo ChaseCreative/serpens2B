@@ -48,9 +48,7 @@ var wrongAnswer2 = 0;
 var num_questions = 5;
 var count = 0;
 
-var subjectArray = [["Is", "est", "He is a ", "Tu", "es"], ["Ego", "sum", "I am a ", "Is", "est"], ["Ea", "est", "She is a ", "Ego", "sum"], ["Tu", "es", "You are a ", "Ea", "est"], ["Id", "est", "It is a ", "Tu", "es"]];
 
-//var subjectArray = [["Nos", "sumus", "We are ", "Vos", "estis"], ["Vos", "estis", "You are ", "Ei", "sunt"], ["Eae", "sunt", "The girls are ", "Nos", "sumus"], ["Ei", "sunt", "The boys are ", "Is", "est"], ["Ea", "sunt", "The things are ", "Ei", "est"]];
 
 
 function incrementCount(){
@@ -330,6 +328,7 @@ countdown = setInterval(countDownTimer,1000);
 
 
 //This sets the correct subject in serpensA
+var subjectArray = [["Is", "est", "He is a ", "Tu", "es"], ["Ego", "sum", "I am a ", "Is", "est"], ["Ea", "est", "She is a ", "Ego", "sum"], ["Tu", "es", "You are a ", "Ea", "est"], ["Id", "est", "It is a ", "Tu", "es"]];
 
 var randomNounIndex = Math.floor(Math.random() * subjectArray.length);
 newSubject = new Noun(subjectArray[randomNounIndex][0]);
@@ -476,9 +475,186 @@ if (count > num_questions) {
 
 
 
+function serpens2BPlural() {
+
+countDownTimer();
+timeleft = 20;
+countdown = setInterval(countDownTimer,1000);
+
+
+resetColors();
+setRandomSerpIndices();
+enableButtons();
+startButton.disabled = true;
 
 
 
+class Noun{
+
+ constructor(nounForms){
+ this.nounForm = nounForms;
+ }
+}
+
+
+
+
+//This sets the correct subject in serpensA
+var subjectArray = [["Nos", "sumus", "We are ", "Vos", "estis"], ["Vos", "estis", "You are ", "Ei", "sunt"], ["Eae", "sunt", "The girls are ", "Nos", "sumus"], ["Ei", "sunt", "The boys are ", "Is", "est"], ["Ea", "sunt", "The things are ", "Ei", "est"]];
+
+var randomNounIndex = Math.floor(Math.random() * subjectArray.length);
+newSubject = new Noun(subjectArray[randomNounIndex][0]);
+var subject = subjectArray[randomNounIndex][0];
+
+
+//This sets the false subject in serpensA1
+falseSubject = new Noun(subjectArray[randomNounIndex][1]);
+var fakeSubject = subjectArray[randomNounIndex][3]
+//get("serBtnA1").innerHTML = fakeSubject;
+
+//This randomizes the serpensA and serpensA1
+
+
+
+if (randomSerpensAIndex == 0) {
+ get("serBtnA").innerHTML = subject;
+ get("serBtnA1").innerHTML = fakeSubject;
+
+} else {
+ get("serBtnA1").innerHTML = subject;
+ get("serBtnA").innerHTML = fakeSubject;
+
+}
+
+
+
+
+
+//This sets the correct subject in serpensB
+//var subjectArray = [["Is", "est", "He is a "], ["ego", "sum", "I am a "], ["Ea", "est", "She is a "], ["tu", "es", "You are a "], ["Id", "est", "It is a "]];
+
+//var objectArray = [["puella", "puell", "girl"], ["agricola", "agricol", "farmer"], ["filia", "fili", "daughter"], ["ancilla", "ancill", "maid servant"], ["nauta", "naut", "sailor"]];
+//var randomObjectIndex = Math.floor(Math.random() * objectArray.length);
+//newObject = new Noun(objectArray[randomObjectIndex][1]);
+//object = newObject.nounForm +accPE1;
+var verb2B = subjectArray[randomNounIndex][1]
+get("serBtnB").innerHTML = verb2B;
+
+
+//This sets the fake object in serpensB2
+//falseObject = new Noun(objectArray[randomObjectIndex][0]);
+//fakeObject = falseObject.nounForm;
+var fakeVerb2B = subjectArray[randomNounIndex][4]
+get("serBtnB2").innerHTML = fakeVerb2B;
+
+
+//This randomizes serpensB and serpensB2
+
+
+if (randomSerpensBIndex == 0) {
+ get("serBtnB").innerHTML = verb2B;
+ get("serBtnB2").innerHTML = fakeVerb2B;
+} else {
+ get("serBtnB2").innerHTML = verb2B;
+ get("serBtnB").innerHTML = fakeVerb2B;
+}
+
+
+var objectArray = [["puella", "puell", "girl", "girls"], ["femina", "femin", "woman", "women"], ["agricola", "agricol", "farmer", "farmers"], ["filia", "fili", "daughter", "daughters"], ["ancilla", "ancill", "maid servant", "maid servants"], ["nauta", "naut", "sailor", "sailors"]];
+var randomObjectIndex = Math.floor(Math.random() * objectArray.length);
+
+falseObject = new Noun(objectArray[randomObjectIndex][1]);
+//var predNom = objectArray[randomObjectIndex][0];
+var predNom = falseObject.nounForm + nomPE2;
+get ("serBtnC").innerHTML = predNom;
+//object = falseObject.nounForm + accPE1;
+object = falseObject.nounForm + accPE2;
+get ("serBtnC3").innerHTML = object;
+
+if (randomSerpensCIndex == 0) {
+get("serBtnC3").innerHTML = object;
+get("serBtnC").innerHTML = predNom;
+} else {
+get("serBtnC").innerHTML = object;
+get("serBtnC3").innerHTML = predNom;
+}
+
+
+
+
+
+
+
+//This prints the correct subject in the sentence
+
+var subjectTranslation = subjectArray[randomNounIndex][2];
+
+
+//This sets the correc verb translaiton in the sentence
+
+
+//This prints the direct object in the sentence
+
+var objectTranslation = objectArray[randomObjectIndex][3];
+//var objectTranslation = objectArray[randomObjectIndex][3];
+
+
+
+
+
+
+
+
+function sentence(){
+ get("startButton").innerHTML = subjectTranslation + " " + objectTranslation + ".";
+}
+
+sentence();
+
+incrementCount();
+
+
+
+//responseButton.innerHTML = count;
+
+if (count > num_questions) {
+ resetColors();
+ serBtnA.innerHTML = "";
+ serBtnB.innerHTML = "";
+ serBtnC.innerHTML = "";
+
+ serBtnA1.innerHTML = "";
+ serBtnB2.innerHTML = "";
+ serBtnC3.innerHTML = "";
+
+
+ startButton.innerHTML = "Click to play again!"
+ startButton.disabled = false;
+ count = 0;
+ document.getElementById("boxThree").innerHTML = "Score";
+ responseButton.innerHTML = "Try to beat your score of " + points + " points!";
+	 points = 0;
+
+ stopTimer();
+ document.getElementById("boxOne").innerHTML = "Timer";
+
+}
+
+
+
+}
+
+
+
+function serpensShuffle(){
+
+
+	var mixUp = [serpens, serpens2BPlural];
+	var randomSerpIndex = Math.floor(Math.random() * mixUp.length);
+
+	mixUp[randomSerpIndex]();
+
+}
 
 
 
